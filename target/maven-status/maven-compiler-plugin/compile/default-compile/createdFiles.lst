@@ -1,0 +1,9 @@
+com/rideshare/domain/model/RideEvent.class
+com/rideshare/domain/model/Ride.class
+com/rideshare/domain/enums/DriverAvailabilityStatus.class
+com/rideshare/domain/enums/RideStatus.class
+com/rideshare/domain/model/Rider.class
+com/rideshare/domain/model/Driver.class
+com/rideshare/RideshareApplication.class
+com/rideshare/domain/model/DriverLocation.class
+com/rideshare/domain/enums/RideEventType.class
