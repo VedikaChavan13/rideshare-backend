@@ -1,9 +1,0 @@
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/RideshareApplication.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/enums/DriverAvailabilityStatus.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/enums/RideEventType.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/enums/RideStatus.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/model/Driver.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/model/DriverLocation.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/model/Ride.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/model/RideEvent.java
-/Users/vedikachavan/Desktop/rideshare-backend/src/main/java/com/rideshare/domain/model/Rider.java
