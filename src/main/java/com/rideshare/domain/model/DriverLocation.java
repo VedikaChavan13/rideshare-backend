@@ -61,6 +61,18 @@ public class DriverLocation {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
+    public void updateLocation(
+            BigDecimal latitude,
+            BigDecimal longitude,
+            DriverAvailabilityStatus availabilityStatus,
+            LocalDateTime lastUpdatedAt
+    ) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.availabilityStatus = availabilityStatus;
+        this.lastUpdatedAt = lastUpdatedAt;
+    }
+
     public Long getId() {
         return id;
     }
