@@ -33,6 +33,9 @@ public class DriverLocation {
     @Column(name = "longitude", nullable = false, precision = 9, scale = 6)
     private BigDecimal longitude;
 
+    @Column(name = "zone_key", nullable = false, length = 50)
+    private String zoneKey;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "availability_status", nullable = false, length = 30)
     private DriverAvailabilityStatus availabilityStatus;
@@ -51,12 +54,14 @@ public class DriverLocation {
             Driver driver,
             BigDecimal latitude,
             BigDecimal longitude,
+            String zoneKey,
             DriverAvailabilityStatus availabilityStatus,
             LocalDateTime lastUpdatedAt
     ) {
         this.driver = driver;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.zoneKey = zoneKey;
         this.availabilityStatus = availabilityStatus;
         this.lastUpdatedAt = lastUpdatedAt;
     }
@@ -64,11 +69,13 @@ public class DriverLocation {
     public void updateLocation(
             BigDecimal latitude,
             BigDecimal longitude,
+            String zoneKey,
             DriverAvailabilityStatus availabilityStatus,
             LocalDateTime lastUpdatedAt
     ) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.zoneKey = zoneKey;
         this.availabilityStatus = availabilityStatus;
         this.lastUpdatedAt = lastUpdatedAt;
     }
@@ -87,6 +94,10 @@ public class DriverLocation {
 
     public BigDecimal getLongitude() {
         return longitude;
+    }
+
+    public String getZoneKey() {
+        return zoneKey;
     }
 
     public DriverAvailabilityStatus getAvailabilityStatus() {

@@ -1,5 +1,6 @@
 package com.rideshare.service;
 
+import com.rideshare.cache.ActiveDriverCacheService;
 import com.rideshare.domain.model.Driver;
 import com.rideshare.domain.model.DriverLocation;
 import com.rideshare.dto.request.DriverLocationUpdateRequest;
@@ -8,6 +9,7 @@ import com.rideshare.dto.response.DriverResponse;
 import com.rideshare.repository.DriverLocationRepository;
 import com.rideshare.repository.DriverRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +19,16 @@ public class DriverService {
 
     private final DriverRepository driverRepository;
     private final DriverLocationRepository driverLocationRepository;
+    private final ActiveDriverCacheService activeDriverCacheService;
 
     public DriverService(
             DriverRepository driverRepository,
-            DriverLocationRepository driverLocationRepository
+            DriverLocationRepository driverLocationRepository,
+            ActiveDriverCacheService activeDriverCacheService
     ) {
         this.driverRepository = driverRepository;
         this.driverLocationRepository = driverLocationRepository;
+        this.activeDriverCacheService = activeDriverCacheService;
     }
 
     @Transactional
@@ -51,11 +56,14 @@ public class DriverService {
         Driver driver = driverRepository.findById(driverId)
                 .orElseThrow(() -> new EntityNotFoundException("Driver not found with id: " + driverId));
 
+        String zoneKey = zoneKey(request.getLatitude(), request.getLongitude());
+
         DriverLocation driverLocation = driverLocationRepository.findByDriverId(driverId)
                 .orElseGet(() -> new DriverLocation(
                         driver,
                         request.getLatitude(),
                         request.getLongitude(),
+                        zoneKey,
                         request.getAvailabilityStatus(),
                         LocalDateTime.now()
                 ));
@@ -64,11 +72,17 @@ public class DriverService {
             driverLocation.updateLocation(
                     request.getLatitude(),
                     request.getLongitude(),
+                    zoneKey,
                     request.getAvailabilityStatus(),
                     LocalDateTime.now()
             );
         }
 
-        driverLocationRepository.save(driverLocation);
+        DriverLocation saved = driverLocationRepository.save(driverLocation);
+        activeDriverCacheService.syncDriverLocation(saved);
+    }
+
+    private String zoneKey(BigDecimal latitude, BigDecimal longitude) {
+        return latitude.intValue() + ":" + longitude.intValue();
     }
 }
