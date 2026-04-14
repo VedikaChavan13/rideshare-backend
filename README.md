@@ -1,6 +1,3 @@
-Here is your **final polished GitHub README** — clean, structured, and ready to paste directly into your repo.
-
----
 
 # 🚖 Ride-Sharing Backend System
 
